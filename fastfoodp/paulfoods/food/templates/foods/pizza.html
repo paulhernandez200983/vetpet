@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>{% block title %}PERFIL {%endblock%}</title>
+        
+            <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        <link rel="icon" href="https://www.flaticon.es/svg/vstatic/svg/3916/3916657.svg?token=exp=1662854069~hmac=136bd71682904cb823525cd8938961b9">
+        {% load static %}
+        <style>
+          .profile-image {
+            width: 150px; /* Ancho de la imagen de perfil */
+            height: 150px; /* Altura de la imagen de perfil */
+            border-radius: 50%; /* Redondea las esquinas para hacer una imagen circular */
+            border: 4px solid #ffffff; /* Agrega un borde blanco a la imagen de perfil */
+            margin-bottom: 20px; /* Agrega un espacio entre la imagen de perfil y otros elementos */
+        }
+          
+        .user-data {
+          margin-bottom: 20px; /* Agrega un espacio entre los datos del usuario y otros elementos */
+      }
+        
+          .navbar-light .navbar-nav .nav-link {
+            color: rgb(189, 172, 103);
+          }
+      body {
+        background-image: url('https://img.freepik.com/foto-gratis/concreto-texturado-blanco_125540-1826.jpg?w=996&t=st=1708584169~exp=1708584769~hmac=6802f37a96b71f7b953580787dab6c7cf1f21b681cf0d8a35082798e77006d33');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+    }
+      body {
+        font-family: "Lucida Console", "Courier New", monospace;
+        }
+  
+      .form-inline .btn-success {
+          background-color: #28a745;
+          border-color: #28a745;
+          color: white;
+      }
+     
+      .btn-info {
+        color: #fff;
+        background-color: #e9d086;
+        border-color: #908a31;
+      }
+      .form-inline .btn-success:hover {
+          background-color: #218838; /* Color de resaltado al pasar el ratón */
+          border-color: #1e7e34;
+      }
+  
+      .navbar-brand img {
+          border: 2px solid white;
+          border-radius: 50%;
+      }
+      .product-card {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+      .ar {
+        color: #fff;
+        text-decoration: none;
+        background-color: #bca52cfc;
+      }
+      .bg-dark {
+          background-color: #2a3b26;
+      }
+     
+    
+    /* Keep your existing styles below this line */
+   
+      .navbar-nav .nav-link {
+          color: white;
+          font-weight: bold;
+      }
+  
+      .navbar-nav .nav-link:hover {
+          color: #17a2b8; /* Color de resaltado al pasar el ratón */
+      }
+  
+      .CARRT {
+          padding: 15px;
+          margin-top: 20px;
+      }
+  
+      .navbar-text {
+          color: black;
+          font-weight: bold;
+      }
+  
+      .navbar-nav {
+          margin-right: 10px;
+      }
+  
+      * {
+          margin: 0;
+          box-sizing: border-box;
+      }
+  
+      .navbar-text {
+          margin-right: 10px;
+      }
+  
+      .navbar-expand-sm {
+          -ms-flex-flow: row nowrap;
+          flex-flow: initial;
+          -ms-flex-pack: start;
+          justify-content: center;
+      }
+  
+      .container {
+          margin-top: 20px;
+      }
+  
+      .form-inline {
+          margin-bottom: 20px;
+      }
+      .w-100 {
+        width: 100% !important;
+      }
+      .card {
+          background-color: white;
+          margin-bottom: 20px;
+          font-family: "Lucida Console", "Courier New", monospace;
+      }
+  
+      .picture {
+          width: 100%;
+          height: auto;
+          max-width: 400px;
+          margin: 10px 0;
+      }
+  
+      .btn-info {
+          margin-top: 10px;
+      }
+  
+      .carr {
+          font-family: "Lucida Console", "Courier New", monospace;
+      }
+  
+      .perr {
+          padding: 177px;
+      }
+  
+      .cartc {
+        background-color: #bfac46;
+          color: black;
+          font-family: "Lucida Console", "Courier New", monospace;
+      }
+        
+    
+        </style>
+        </head>
+        <body>
+          <nav class="navbar navbar-expand-sm bg-light navbar-light">
+            <!-- Brand/logo -->
+            <a class="navbar-brand" href="#">
+              <img class="bg-light rounded-circle" src="https://img.freepik.com/vector-gratis/logotipo-viaje-detallado_23-2148627268.jpg" alt="" style="width:100px;"/>
+            </a>
+            
+            <!-- Links -->
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link {% if active_link == 'index' %} active{% endif %}" href="{% url 'index' %}">HOME</a>
+              </li>
+              {%if user.is_authenticated%}
+              <li class="nav-item">
+                <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:chicken' %}">DEPORTES EXTREMOS</a>
+              </li>
+              
+              {%else%}
+              <li class="nav-item">
+                <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:login' %}">LOGGEATE PARA VER LOS VIAJES</a>
+              </li>
+              {%endif%}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'food:burger' %}">MAPA</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'food:drink' %}">UBICACIONES</a>
+              </li>
+        
+              <li class="nav-item">
+                <a class="nav-link {% if active_link == 'pizza' %} active{% endif %}" href="{% url 'food:pizza' %}">PERFIL</a>
+              </li>
+               {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <span class="navbar-text">Bienvenido {{ user.username }}</span>
+                </li>
+                {% endif %}
+              <li class="nav-item">
+                <a href="{% url 'food:order' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+                    <img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/>
+                    <span id="cart">0</span>
+                </a>
+              </li>
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a href="{% url 'food:logout' %}" class="nav-link">
+                    <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                    LogOut
+                </a>
+              </li>
+        
+                <ul>
+             
+              {% else %}
+              <li class="nav-item">
+                <a href="{% url 'food:login' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+                    <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                    LogIn
+                </a>
+              </li> <li class="nav-item">
+                <a href="{% url 'food:signup' %}" class="nav-link {% if active_link == 'signup' %}active {% endif %}">
+                    <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                    Create account
+                </a>
+              </li>
+              {% endif %}
+            </ul> 
+            
+          </nav><center>
+          <div>
+            {% block content %}
+            <br><br><br>
+            <div class="col-md-6 p-4 card" style="color:black">
+  <h1>PERFIL DEL USUARIO</h1>
+  
+
+    {% if user.is_authenticated %}
+    <center>
+      <img class="profile-image" src="{{ user.profile_image_url }}" alt="Profile Image">
+                <!-- Datos del usuario -->
+                <div class="user-data">
+                    <p><strong>Bienvenido {{ user.username }}</strong></p><br>
+                    <p><strong>Nombre:</strong> {{ user.first_name }} {{ user.last_name }}</p><br>
+                    <p><strong>Email:</strong> {{ user.email }}</p><br>
+                    <p><strong>Teléfono: </strong> {{ user.phone_number }}</p><br>
+                    <p><strong>Direcion: </strong> {{ user.direccion }}</p><br>
+                    <p><img class="bg-light rounded" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/2560px-Flag_of_Mexico.svg.png" alt="" style="width:60px;"/><strong> Estado: </strong>{{ user.estado }}</p><br>
+                    <p><strong>Cuenta creada el:</strong> {{ user.date_joined }}</p>
+              
+                </div>
+          {%else%}
+          <li class="nav-item">
+            <a href="{% url 'food:login' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+                <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                Inicia sesion para ver tu perfil
+            </a>
+          </li> <li class="nav-item">
+            <a href="{% url 'food:signup' %}" class="nav-link {% if active_link == 'signup' %}active {% endif %}">
+                <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                Crea una cuneta nueve y unete
+            </a>
+          </li>
+    
+    {% endif %}
+  </div>
+{% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'food/js/main.js' %}"></script>
+<script src="{% static 'food/js/order.js' %}"></script>
+<script src="{% static 'food/js/cart.js' %}"></script>
+
+
+
+        </body><footer class="bg-dark text-white p-4">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-4">
+              <h4>Contacto</h4>
+              <p><i class="fas fa-map-marker-alt"></i> Dirección: Ciudad, País</p>
+              <p><i class="fas fa-envelope"></i> Correo: info@extremetravel.com</p>
+              <p><i class="fas fa-phone"></i> Teléfono: +123 456 7890</p>
+          </div>
+          <div class="col-md-4">
+              <h4>Enlaces útiles</h4>
+              <ul class="list-unstyled">
+                  <li><a href="#">Inicio</a></li>
+                  <li><a href="#">Destinos</a></li>
+                  <li><a href="#">Tours</a></li>
+                  <li><a href="#">Reseñas</a></li>
+              </ul>
+          </div>
+          <div class="col-md-4">
+              <h4>Síguenos</h4>
+              <p>Conéctate con nosotros en redes sociales:</p>
+              <a href="#" class="btn btn-outline-light"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="btn btn-outline-light"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="btn btn-outline-light"><i class="fab fa-instagram"></i></a>
+          </div>
+      </div>
+  </div>
+</footer>
+        </html>

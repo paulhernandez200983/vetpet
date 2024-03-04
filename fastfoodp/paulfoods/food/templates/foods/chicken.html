@@ -1,0 +1,720 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ACTIVIDADES {% endblock %}</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    {% load static %}
+    <style>
+      body {
+        background-image: url('https://img.freepik.com/foto-gratis/concreto-texturado-blanco_125540-1826.jpg?w=996&t=st=1708584169~exp=1708584769~hmac=6802f37a96b71f7b953580787dab6c7cf1f21b681cf0d8a35082798e77006d33');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+    }
+    .banner p {
+      margin-top: 10px;
+      font-size: 1.2em;
+      padding: 10px; /* Añade un relleno alrededor del texto */
+      background-color: rgba(0, 0, 0, 0.57); /* Fondo semitransparente, puedes ajustar el color y la opacidad según sea necesario */
+  }
+        body {
+          
+            font-family: "Lucida Console", "Courier New", monospace;
+        }
+        a{
+          color: #e9d086;
+        }
+      
+      .navbar-light .navbar-nav .nav-link {
+        color: rgb(189, 172, 103);
+      }
+        .form-inline .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+        .btn-info {
+          color: #fff;
+          background-color: #e9d086;
+          border-color: #908a31;
+        }
+        .form-inline .btn-success:hover {
+            background-color: #218838; /* Color de resaltado al pasar el ratón */
+            border-color: #1e7e34;
+        }
+    
+        .navbar-brand img {
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+        .ar {
+          color: #fff;
+          text-decoration: none;
+          background-color: #bca52cfc;
+        }
+        .bg-dark {
+            background-color: #2a3b26;
+        }
+    
+        .navbar-nav .nav-link {
+            color: white;
+            font-weight: bold;
+            
+        }
+    
+        .navbar-nav .nav-link:hover {
+            color: #17a2b8; /* Color de resaltado al pasar el ratón */
+        }
+    
+        .CARRT {
+            padding: 15px;
+            margin-top: 20px;
+        }
+    
+        .navbar-text {
+            color: white;
+            font-weight: bold;
+        }
+    
+        .navbar-nav {
+            margin-right: 10px;
+        }
+    
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+    
+        .navbar-text {
+            margin-right: 10px;
+        }
+    
+        .navbar-expand-sm {
+            -ms-flex-flow: row nowrap;
+            flex-flow: initial;
+            -ms-flex-pack: start;
+            justify-content: center;
+        }
+        .rating {
+          unicode-bidi: bidi-override;
+          direction: rtl;
+          display: inline-block;
+      }
+      
+      .rating > span {
+          display: inline-block;
+          position: relative;
+          width: 1.1em;
+          font-size: 36px;
+      }
+      
+      .rating > span:hover:before,
+      .rating > span:hover ~ span:before {
+          content: "\2605";
+          position: absolute;
+      }
+      
+      .rating > span:hover:before {
+          color: gold;
+      }
+      
+      .rating > span:before {
+          content: "\2606";
+          position: absolute;
+      }
+      
+        .container {
+            margin-top: 20px;
+        }
+    
+        .form-inline {
+            margin-bottom: 20px;
+        }
+        .BET{
+          border: 2px solid #908a31;; /* Borde amarillo */
+    background-color: transparent; /* Fondo transparente */
+    color: inherit; /* Hereda el color de texto del contenedor padre */
+    padding: 10px 20px; /* Ajusta el relleno según sea necesario */
+    cursor: pointer;
+        }
+        .BET:hover {
+          background-color: #e9d086; /* Cambia el fondo al pasar el ratón */
+          color: black; /* Cambia el color del texto al pasar el ratón */
+      }
+        .card {
+          background-color: #fff; /* Set a light background color */
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+          padding: 20px;
+          margin-bottom: 20px;
+          border-radius: 10px; /* Optional: Add rounded corners */
+      }
+    
+        
+        .picture {
+          width: 100%;
+          height: auto;
+          max-width: 400px;
+          margin: 10px 0;
+          border: 2px solid #ddd; /* Optional: Add a border */
+          border-radius: 10px; /* Optional: Add rounded corners */
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow */
+      }
+    
+    
+        .btn-info {
+            margin-top: 10px;
+        }
+    
+        .carr {
+            font-family: "Lucida Console", "Courier New", monospace;
+        }
+    
+        .perr {
+            padding: 177px;
+        }
+    
+        .cartc {
+          background-color: #bfac46;
+            color: black;
+            font-family: "Lucida Console", "Courier New", monospace;
+        }
+        .banner {
+          position: relative;
+          width: 100%;
+          height: 300px; /* Ajusta la altura según sea necesario */
+          background-image: url('https://adeprotur.com.mx/frontend/adeprotur/media/news/529/7-extreme-sport-fb884aa5.jpg'); /* Ruta de la imagen */
+          background-size: cover;
+          background-position: center;
+          color: #fff; /* Color del texto */
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+      
+      .banner-content {
+          z-index: 1;
+      }
+      
+      .banner h1 {
+          margin: 0;
+          font-size: 2em;
+      }
+      
+      .banner p {
+          margin-top: 10px;
+          font-size: 1.2em;
+      }
+    
+
+    </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm bg-light navbar-light">
+    <!-- Brand/logo -->
+    <a class="navbar-brand" href="#">
+      <img class="bg-light rounded-circle" src="https://img.freepik.com/vector-gratis/logotipo-viaje-detallado_23-2148627268.jpg" alt="" style="width:100px;"/>
+    </a>
+    
+    <!-- Links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link {% if active_link == 'index' %} active{% endif %}" href="{% url 'index' %}">HOME</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:chicken' %}">DEPORTES EXTREMOS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'food:burger' %}">MAPA</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'food:drink' %}">UBICACIONES</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'food:pizza' %}">PERFIL</a>
+      </li>
+       {% if user.is_authenticated %}
+        <li class="nav-item">
+            <span class="navbar-text">Bienvenido {{ user.username }}</span>
+        </li>
+        {% endif %}
+      <li class="nav-item">
+        <a href="{% url 'food:ver_carrito_y_pagar' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+            <img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/>
+            
+        </a>
+      </li>
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a href="{% url 'food:logout' %}" class="nav-link">
+            <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+            LogOut
+        </a>
+      </li>
+
+        <ul>
+     
+      {% else %}
+      <li class="nav-item">
+        <a href="{% url 'food:login' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+            <img class="bg-light rounded" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+            LogIn
+        </a>
+      </li> <li class="nav-item">
+        <a href="{% url 'food:signup' %}" class="nav-link {% if active_link == 'signup' %}active {% endif %}">
+            <img class="bg-light rounded" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+            Create account
+        </a>
+      </li>
+      {% endif %}
+    </ul> 
+    
+  </nav>
+  {% block content %} {% endblock %}
+  <center>
+    <div class="banner">
+      <div class="banner-content">
+          
+          <p><b>LAS MEJORES OFERTAS PARA VIAJES EN UN SOLO LUGAR</b></p>
+      </div>
+      
+  </div><br><br>
+    <div class="container">
+      <form class="form-inline">
+          <input class="form-control mr-sm-2" type="text" placeholder="Buscar por nombre" id="searchInput">
+          <button class="btn btn-info my-2 my-sm-0" type="button" onclick="filterByName()"><img srcset="https://cdn.icon-icons.com/icons2/2066/PNG/512/search_icon_125165.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/> Buscar</button>
+      </form>
+    </div>
+
+    <div class="container">
+      <form class="form-inline">
+          <!-- ... (Tu formulario de búsqueda existente) ... -->
+          <input class="form-control mr-sm-2" type="text" placeholder="Buscar por locación" id="searchInput">
+
+        <!-- Filtro por categoría -->
+        <select class="form-control mr-sm-2" id="categoryFilter">
+          <option value="TODAS">TODAS</option>
+          {% for chicken in chickens %}
+              <option value="{{ chicken.estd }}">{{ chicken.estd }}</option>
+          {% endfor %}
+      </select>
+      
+<button type="button" class="btn btn-info my-2 my-sm-0" onclick="filterByCategory()">Filtrar por Categoría</button>
+        <!-- Botón de búsqueda -->
+        
+      </form>
+      <select class="form-control mr-sm-2" id="priceFilter">
+        <option value="ALL">Todos los precios</option>
+        <option value="ECONOMIC">Menor a $3000</option>
+        <option value="PREMIUM">Mayor a $3000</option>
+    </select>
+    <button type="button" class="btn btn-info my-2 my-sm-0" onclick="filterbyprice()">Filtrar por precio</button>
+    <div class="container">
+     
+          <div class="container mt-2">
+            <button type="button" class=" BET btn btn-info" onclick="filterByTerrestrial('{{chicken.catg}}')"><img srcset="https://media.istockphoto.com/id/1314393435/es/vector/piloto-de-atv-icono-glifo-vectorial-plano-quad.jpg?s=612x612&w=0&k=20&c=mJaTmPLmUUCnG9LvHSbp7mnz8U9kMMPcvlJ_EaAfnLs= 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/> Mostrar Terrestres</button>
+            <button type="button" class="BET btn btn-info" onclick="filterByAerial('{{chicken.catg}}')"><img srcset="https://media.istockphoto.com/id/1357597454/es/vector/parapente-dos-personas-con-paraca%C3%ADdas-silueta-eps.jpg?s=612x612&w=0&k=20&c=Ks-eLVr0ykfkLe1DgM1yBjwOoPriq2RjPPg9fbvHFuY= 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/> Mostrar Aereos</button>
+            <button type="button" class="BET btn btn-info" onclick="filterByAqua('{{chicken.catg}}')"><img srcset="https://st4.depositphotos.com/2517275/29911/v/450/depositphotos_299115886-stock-illustration-front-view-of-a-boat.jpg 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/> Mostrar Acuaticos</button>
+        </div>
+      </div>
+      
+
+  </div>
+    </div>
+    <script>
+      function filterByName() {
+          var input, filter, cards, card, i, txtValue;
+          input = document.getElementById("searchInput");
+          filter = input.value.toUpperCase();
+          cards = document.querySelectorAll(".col-md-6");
+    
+          for (i = 0; i < cards.length; i++) {
+              card = cards[i];
+              txtValue = card.textContent || card.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  card.style.display = "";
+              } else {
+                  card.style.display = "none";
+              }
+          }
+      }
+      function calculateRating(reviews) {
+        if (reviews.length === 0) return 0;
+
+        const totalRating = reviews.reduce((acc, review) => acc + review.rating, 0);
+        const averageRating = totalRating / reviews.length;
+
+        return Math.round(averageRating);
+    }
+
+    // Función para mostrar el rating de cada actividad
+    function showRating(chickenRating) {
+        const ratingElement = document.createElement('div');
+        ratingElement.classList.add('rating');
+
+        // Crea un elemento span para cada estrella en base al rating de la actividad
+        for (let i = 0; i < 5; i++) {
+            const star = document.createElement('span');
+            if (i < chickenRating) {
+                star.innerHTML = '&#x2605'; // Estrella llena
+            } else {
+                star.innerHTML = '&#x2606'; // Estrella vacía
+            }
+            ratingElement.appendChild(star);
+        }
+
+        return ratingElement;
+    }
+
+    // Obtén todas las actividades y asigna el rating correspondiente
+    const chickens = document.querySelectorAll('.col-md-6');
+    chickens.forEach(chicken => {
+        const rating = calculateRating(chicken.reviews);
+        const ratingElement = showRating(rating);
+        chicken.querySelector('.rating').replaceWith(ratingElement);
+    });
+     
+      function filterByCategory() {
+        var categoryFilter = document.getElementById("categoryFilter");
+        var selectedCategory = categoryFilter.value.toUpperCase();
+
+        var cards = document.querySelectorAll(".col-md-6");
+
+        for (var i = 0; i < cards.length; i++) {
+            var card = cards[i];
+            var categoryValue = card.querySelector(".CATGG").textContent.toUpperCase();
+
+            if (selectedCategory === "TODAS" || categoryValue.includes(selectedCategory)) {
+                card.style.display = "";
+            } else {
+                card.style.display = "none";
+            }
+        }
+    }
+    function filterByTerrestrial() {
+      var cards = document.querySelectorAll(".col-md-6");
+  
+      for (var i = 0; i < cards.length; i++) {
+          var card = cards[i];
+          var categoryValue = card.querySelector(".category-value").textContent.toUpperCase();
+  
+          // Ajusta el valor aquí según lo que debería ser para actividades terrestres
+          var terrestrialCategory = "TERRESTRE";
+  
+          if (categoryValue.includes(terrestrialCategory)) {
+              card.style.display = "";
+          } else {
+              card.style.display = "none";
+          }
+      }
+  }
+  function filterByAerial() {
+    var cards = document.querySelectorAll(".col-md-6");
+
+    for (var i = 0; i < cards.length; i++) {
+        var card = cards[i];
+        var categoryValue = card.querySelector(".category-value").textContent.toUpperCase();
+
+        // Ajusta el valor aquí según lo que debería ser para actividades aéreas
+        var aerialCategory = "AÉREO";
+
+        if (categoryValue.includes(aerialCategory)) {
+            card.style.display = "";
+        } else {
+            card.style.display = "none";
+        }
+    }
+}
+
+function filterByAqua() {
+  var cards = document.querySelectorAll(".col-md-6");
+
+  for (var i = 0; i < cards.length; i++) {
+      var card = cards[i];
+      var categoryValue = card.querySelector(".category-value").textContent.toUpperCase();
+
+      // Ajusta el valor aquí según lo que debería ser para actividades terrestres
+      var terrestrialCategory = "ACUÁTICO";
+
+      if (categoryValue.includes(terrestrialCategory)) {
+          card.style.display = "";
+      } else {
+          card.style.display = "none";
+      }
+  }
+}
+
+
+
+
+
+  
+
+
+
+    </script>
+    <script>
+      // Arreglo para almacenar las actividades en la lista de deseos
+      var wishlist = [];
+
+      // Función para agregar actividad a la lista de deseos
+      
+
+      // Función para actualizar la lista de deseos en la pantalla
+      function updateWishlist() {
+          // Obtener el elemento donde mostraremos la lista de deseos
+          var wishlistElement = document.getElementById("wishlist");
+
+          // Limpiar el contenido anterior de la lista de deseos
+          wishlistElement.innerHTML = "";
+
+          // Recorrer el arreglo de lista de deseos y agregar cada actividad como un elemento de lista
+          wishlist.forEach(function(activity) {
+              var listItem = document.createElement("li");
+              listItem.textContent = activity;
+              wishlistElement.appendChild(listItem);
+          });
+      }
+      function addToWishlist(chickenId, name) {
+        wishlist.push(name);
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        updateWishlist();
+        $('#confirmationModal1').modal('show');
+    }
+    
+    // Función para cargar la wishlist desde el localStorage al cargar la página
+    function loadWishlist() {
+        var savedWishlist = localStorage.getItem('wishlist');
+        if (savedWishlist) {
+            wishlist = JSON.parse(savedWishlist);
+            updateWishlist();
+        }
+    }
+    loadWishlist();
+  </script>
+    
+    <script>
+      function showConfirmationModal() {
+          $('#confirmationModal').modal('show');
+      }
+  </script>
+  
+    <div class="container-fluid perr" style="padding:100px">
+      <div class="row text-center background-color-dark">
+        <div class="col-md-8">
+          <div class="row">
+            {% for chicken in chickens %}
+              <div class="col-md-6 p-4 card">
+                <center>
+                  <button class="category-value btn-info mt-4 rounded"><b>{{chicken.catg}}</b></button>
+                  <div class="rating">
+                    <!-- Utiliza íconos de estrellas vacías para representar las estrellas de calificación -->
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <!-- ... (Contenido existente de tus actividades extremas) ... -->
+                <h4 class="pt-4 " id="chick{{chicken.id}}">  {{chicken.name}}</h4>
+             <img class="picture  rounded" src="{{chicken.pImage}}" style="width:400px" height="400px">
+             <br><br> <img srcset="https://w7.pngwing.com/pngs/403/272/png-transparent-earth-globe-computer-icons-earth-globe-monochrome-world-thumbnail.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/> <span class="CATGG">{{chicken.estd}}</span><br><br>
+          <H4>Paquete:</H4>
+         
+          <div class = " form-check-inline">
+            <label class="form-check-labelL">
+              <input class="mp form-check-input" name = "chicken{{chicken.id}}" value=" {{chicken.priceM}}" type="radio" >
+               Economico : $ {{chicken.priceM}} 
+            </label>
+          </div>
+
+          <div class = " form-check-inline">
+            <label class="form-check-labelM">
+              <input class="lp form-check-input" name = "chicken{{chicken.id}}" value=" {{chicken.priceL}}" type="radio" >
+              Premium : $ {{chicken.priceL}} 
+            </label>
+          </div>
+          <button class="btn-info mt-4" onclick="addToWishlist('{{ chicken.id }}', '{{ chicken.name }}')">
+            <img src="https://cdn-icons-png.freepik.com/512/1077/1077035.png" alt="heart" style="width: 20px; height: 20px;">
+            AÑADIR A WISHLIST
+        </button><br>
+        <form action="{% url 'food:agregar_al_carrito' chicken.id %}" method="post">
+          {% csrf_token %}
+          <button class="btn-info mt-4"type="submit" onclick=showConfirmationModal();><img src="https://www.bogotraveltours.com/wp-content/uploads/2016/10/icono-encuentro.png" alt="heart" style="width: 20px; height: 20px;"> Agregar al carrito</button>
+      </form>
+        
+          <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmationModalLabel">Confirmación</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ¡Tour agregado al carrito con éxito para la fecha!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <script>
+          
+      </script>
+      <div class="modal fade" id="confirmationModal1" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">Elemento agregado a la wishlist</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    El elemento ha sido agregado a tu wishlist.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+
+
+       
+         <br>
+         <script>
+          function redirectToDetails(chickenId) {
+              // Cambia la URL según la estructura de tus URLs de detalles
+              window.location.href = "{% url 'food:details' 0 %}".replace("0", chickenId);
+          }
+      </script>
+          <button class="BET btn-info mt-4" onclick="redirectToDetails('{{ chicken.id }}')"><B><img src="https://cdn.icon-icons.com/icons2/1206/PNG/512/1491254405-plusaddmoredetail_82972.png" alt="heart" style="width: 20px; height: 20px;"> Ver Detalles</B></button>
+          
+        
+           
+       
+
+              </div>
+              
+            {% endfor %}<div class="pagination">
+              <span class="step-links">
+                  {% if chickens.has_previous %}
+                      <a href="?page=1">&laquo; first</a>
+                      <a href="?page={{ chickens.previous_page_number }}">previous</a>
+                  {% endif %}
+      
+                  <span class="current">
+                      Página {{ chickens.number }} de {{ chickens.paginator.num_pages }}.
+                  </span>
+      
+                  {% if chickens.has_next %}
+                      <a href="?page={{ chickens.next_page_number }}">next</a>
+                      <a href="?page={{ chickens.paginator.num_pages }}">last &raquo;</a>
+                  {% endif %}
+              </span>
+          </div>
+            
+          </div>
+          
+        </div>
+
+        <div class="col-md-4 carr"><div class="bg-light CARRT">
+          
+
+          <h3><img srcset="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJfOfyBce9Ctn7Ki0qOfrcEoqtV5FAHw90ETAJZta5EA&s 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/> Lista de Deseos</h3>
+          <ul id="wishlist"></ul>
+      </div>
+          <div class="bg-light CARRT">
+            <h3><img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/> Carrito de compras</h3>
+            
+            <ul>
+              {% if items_carrito %}
+                  {% for item in items_carrito %}
+                      {% if item.pollo.name == "TOUR POR LOS CABOS" or item.pollo.name == "TOUR POR CDMX" or item.pollo.name == "TOUR POR LA PAZ" or item.pollo.name == "TOUR POR TULUM" %}
+                          <li style="background-color: #d4edda;">{{ item.pollo.name }} - Cantidad: {{ item.cantidad }} <a href="{% url 'food:eliminar_del_carrito' item.id %}">Eliminar</a></li>
+                      {% else %}
+                          <li style="background-color: beige;">{{ item.pollo.name }} - Cantidad: {{ item.cantidad }} <a href="{% url 'food:eliminar_del_carrito' item.id %}">Eliminar</a></li>
+                      {% endif %}
+                  {% endfor %}
+                  <a class="ar" href="{% url 'food:ver_carrito_y_pagar' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">Checkout</a>
+              {% else %}
+                  <p>No hay productos en el carrito.</p>
+              {% endif %}
+          </ul>
+          </div>
+
+          
+        
+    <a href="{% url 'food:chicken' %}">Volver a la lista de productos</a>
+        </div>
+      </div>
+    </div>
+    
+</div>
+</div>
+
+    <h2>{{ msg }}</h2>
+  </center>
+ <footer class="bg-dark text-white p-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Contacto</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Dirección: Ciudad, País</p>
+                <p><i class="fas fa-envelope"></i> Correo: info@extremetravel.com</p>
+                <p><i class="fas fa-phone"></i> Teléfono: +123 456 7890</p>
+            </div>
+            <div class="col-md-4">
+                <h4>Enlaces útiles</h4>
+                <ul class="list-unstyled">
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Destinos</a></li>
+                    <li><a href="#">Tours</a></li>
+                    <li><a href="#">Reseñas</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>Síguenos</h4>
+                <p>Conéctate con nosotros en redes sociales:</p>
+                <a href="https://www.tripadvisor.com.mx/ShowUrl-a_partnerKey.1-a_url.http%3A__2F____2F__www__2E__facebook__2E__com__2F__TripAdvisor-a_urlKey.15090f72418302936.html" class="btn btn-outline-light"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="btn btn-outline-light"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="btn btn-outline-light"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+  <!-- jQuery library -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <!-- Popper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'food/js/main.js' %}"></script>
+  <script src="{% static 'food/js/order.js' %}"></script>
+
+ 
+</body>
+</html>

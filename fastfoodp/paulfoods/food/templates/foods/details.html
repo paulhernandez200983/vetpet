@@ -1,0 +1,466 @@
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ACTIVIDADES {% endblock %}</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="icon" href="https://www.flaticon.es/svg/vstatic/svg/3916/3916657.svg?token=exp=1662854069~hmac=136bd71682904cb823525cd8938961b9">
+    {% load static %}
+    <style>
+      .card {
+        display: flex; /* Use flexbox to enable a horizontal layout */
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+    
+    .picture {
+        width: 100%;
+        height: auto;
+        max-width: 300px; /* Adjust the maximum width of the image */
+        margin-right: 20px; /* Add spacing between image and data */
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .col-md-6 {
+        flex: 1; /* Distribute the available space equally between image and data */
+    }
+      body {
+        background-image: url('https://img.freepik.com/foto-gratis/concreto-texturado-blanco_125540-1826.jpg?w=996&t=st=1708584169~exp=1708584769~hmac=6802f37a96b71f7b953580787dab6c7cf1f21b681cf0d8a35082798e77006d33');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+    }
+        body {
+          
+            font-family: "Lucida Console", "Courier New", monospace;
+        }
+        a{
+          color: #e9d086;
+        }
+      
+      .navbar-light .navbar-nav .nav-link {
+        color: rgb(189, 172, 103);
+      }
+        .form-inline .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+        .btn-info {
+          color: #fff;
+          background-color: #e9d086;
+          border-color: #908a31;
+        }
+        .form-inline .btn-success:hover {
+            background-color: #218838; /* Color de resaltado al pasar el ratón */
+            border-color: #1e7e34;
+        }
+    
+        .navbar-brand img {
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+        .ar {
+          color: #fff;
+          text-decoration: none;
+          background-color: #bca52cfc;
+        }
+        .bg-dark {
+            background-color: #2a3b26;
+        }
+    
+        .navbar-nav .nav-link {
+            color: white;
+            font-weight: bold;
+            
+        }
+    
+        .navbar-nav .nav-link:hover {
+            color: #17a2b8; /* Color de resaltado al pasar el ratón */
+        }
+    
+        .CARRT {
+            padding: 15px;
+            margin-top: 20px;
+        }
+    
+        .navbar-text {
+            color: white;
+            font-weight: bold;
+        }
+    
+        .navbar-nav {
+            margin-right: 10px;
+        }
+    
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+    
+        .navbar-text {
+            margin-right: 10px;
+        }
+    
+        .navbar-expand-sm {
+            -ms-flex-flow: row nowrap;
+            flex-flow: initial;
+            -ms-flex-pack: start;
+            justify-content: center;
+        }
+    
+        .container {
+            margin-top: 20px;
+        }
+    
+        .form-inline {
+            margin-bottom: 20px;
+        }
+    
+        
+    
+        
+    
+        .btn-info {
+            margin-top: 10px;
+        }
+    
+        .carr {
+            font-family: "Lucida Console", "Courier New", monospace;
+        }
+    
+        .perr {
+            padding: 177px;
+        }
+    
+        .cartc {
+          background-color: #bfac46;
+            color: black;
+            font-family: "Lucida Console", "Courier New", monospace;
+        }
+    
+
+    </style>
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+        <!-- Brand/logo -->
+        <a class="navbar-brand" href="#">
+          <img class="bg-light rounded-circle" src="https://img.freepik.com/vector-gratis/logotipo-viaje-detallado_23-2148627268.jpg" alt="" style="width:100px;"/>
+        </a>
+        
+        <!-- Links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link {% if active_link == 'index' %} active{% endif %}" href="{% url 'index' %}">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:chicken' %}">DEPORTES EXTREMOS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'food:burger' %}">MAPA</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'food:drink' %}">UBICACIONES</a>
+          </li>
+    
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'food:pizza' %}">PERFIL</a>
+          </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <span class="navbar-text">Bienvenido {{ user.username }}</span>
+            </li>
+            {% endif %}
+          <li class="nav-item">
+            <a href="{% url 'food:order' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+                <img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/>
+                <span id="cart">0</span>
+            </a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a href="{% url 'food:logout' %}" class="nav-link">
+                <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                <br>LogOut
+            </a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a href="{% url 'food:login' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+                <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                <br>LogIn
+            </a>
+          </li><li class="nav-item">
+            <a href="{% url 'food:signup' %}" class="nav-link {% if active_link == 'signup' %}active {% endif %}">
+                <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                <br>Create account
+            </a>
+          </li>
+          {% endif %}
+          
+        </ul>
+      </nav>
+</head>
+<body>
+  
+  <center>
+    <div class="container">
+      <form class="form-inline">
+          <input class="form-control mr-sm-2" type="text" placeholder="Buscar por nombre" id="searchInput">
+          <button class="btn btn-info my-2 my-sm-0" type="button" onclick="filterByName()">Buscar</button>
+      </form>
+    </div>
+
+    <div class="container">
+      <form class="form-inline">
+          <!-- ... (Tu formulario de búsqueda existente) ... -->
+          <input class="form-control mr-sm-2" type="text" placeholder="Buscar por nombre" id="searchInput">
+
+        <!-- Filtro por categoría -->
+        <select class="form-control mr-sm-2" id="categoryFilter">
+            <option value="">Todas las categorías</option>
+            <option value="extreme">Deportes Extremos</option>
+            <!-- Agrega más opciones según tus necesidades -->
+        </select>
+
+        <!-- Botón de búsqueda -->
+        <button class="btn btn-info my-2 my-sm-0" type="button" onclick="filterByNameAndCategory()">Buscar</button>
+      </form>
+    </div>
+    <script>
+      function filterByName() {
+          var input, filter, cards, card, i, txtValue;
+          input = document.getElementById("searchInput");
+          filter = input.value.toUpperCase();
+          cards = document.querySelectorAll(".col-md-6");
+    
+          for (i = 0; i < cards.length; i++) {
+              card = cards[i];
+              txtValue = card.textContent || card.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  card.style.display = "";
+              } else {
+                  card.style.display = "none";
+              }
+          }
+      }
+     
+        function filterByNameAndCategory() {
+            var input, categoryFilter, dateFilter, filter, cards, card, i, txtValue;
+            input = document.getElementById("searchInput");
+            categoryFilter = document.getElementById("categoryFilter");
+            dateFilter = document.getElementById("dateFilter");
+            filter = input.value.toUpperCase();
+            category = categoryFilter.value.toUpperCase();
+            date = dateFilter.value;
+            cards = document.querySelectorAll(".col-md-6");
+    
+            for (i = 0; i < cards.length; i++) {
+                card = cards[i];
+                txtValue = card.textContent || card.innerText;
+                if ((txtValue.toUpperCase().indexOf(filter) > -1) && (category === "" || txtValue.toUpperCase().includes(category)) && (date === "" || txtValue.toUpperCase().includes(date))) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            }
+        }
+    
+        function addchicken(chickenId) {
+            // Modify this function to include the selected date along with other details
+            var selectedDate = document.getElementById("dateFilter").value;
+            // Rest of the function logic...
+        }
+    </script>
+    
+   
+
+    <div class="col-md-6 p-4 card">
+      <div class="row">
+          <div class="col-md-6">
+              <img class="picture rounded" src="{{chicken.pImage}}" style="width: 400px; height: 300px;">
+          </div>
+          <div class="col-md-6">
+              <h2 class="pt-4" id="chick{{chicken.id}}">{{chicken.name}}</h2>
+
+              <br>
+              <div class="rating">
+                <!-- Utiliza íconos de estrellas vacías para representar las estrellas de calificación -->
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+            </div><br>
+              <img srcset="https://w7.pngwing.com/pngs/403/272/png-transparent-earth-globe-computer-icons-earth-globe-monochrome-world-thumbnail.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; "/> {{chicken.estd}}<br>
+              
+              <div>
+                  <b>
+                      <br>
+                      <p>Descripcion: {{chicken.desc}}</p>
+                      <p>Direccion: {{chicken.address}}</p>
+                    
+                      <p><img srcset="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7UilSX7KAnQYtqU2t2AAT6_v6S5kAuueQ7FY_103pYkSJ0hE0ACrvV9f3Oo69jJDPCA4&usqp=CAU 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; "/> Tel: {{chicken.tel}}</p>
+                  </b>
+                  <p>Fecha de Viaje: {{chicken.datev}}</p>
+   
+                  <H3>Paquete:</H3>
+              <div class="form-check-inline">
+                  <label class="form-check-label">
+                      <input class="form-check-input" name="chicken{{chicken.id}}" value="{{chicken.priceM}}" type="radio">
+                      Economico :{{chicken.priceM}} $
+                  </label>
+              </div>
+              <div class="form-check-inline">
+                  <label class="form-check-label">
+                      <input class="form-check-input" name="chicken{{chicken.id}}" value="{{chicken.priceL}}" type="radio">
+                      Premium :{{chicken.priceL}} $
+                  </label>
+              </div>
+              <button class="btn-info mt-4" onclick="addchicken('{{ chicken.id }}', '{{chicken.name}}', '{{chicken.desc}}', '{{chicken.address}}', '{{chicken.tel}}', '{{chicken.priceM}}', '{{chicken.priceL}}', '{{chicken.datev}}'); showConfirmationModal();">AÑADIR A TOUR</button>
+
+
+              </div>
+          </div>
+      </div>
+  </div>
+  
+          
+              <!--<div class="col-md-6 p-4 card">
+                <center>
+                
+                <h2 class="pt-4 " id="chick{{chicken.id}}">  {{chicken.name}}</h2>
+             <img class="picture  rounded" src="{{chicken.pImage}}" style="width:300px" height="300px">
+             <br><br><img srcset="https://w7.pngwing.com/pngs/403/272/png-transparent-earth-globe-computer-icons-earth-globe-monochrome-world-thumbnail.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/> {{chicken.estd}}<br>
+          <H3>Paquete:</H3>
+          <div class = " form-check-inline">
+            <label class="form-check-label">
+              <input class="form-check-input" name = "chicken{{chicken.id}}" value=" {{chicken.priceM}}" type="radio" >
+               Economico :{{chicken.priceM}} $
+            </label>
+          </div>
+
+          <div class = " form-check-inline">
+            <label class="form-check-label">
+              <input class="form-check-input" name = "chicken{{chicken.id}}" value=" {{chicken.priceL}}" type="radio" >
+              Premium :{{chicken.priceL}} $
+            </label>
+          </div>
+            <div>
+                <b>
+                <br>
+                <p>Descripcion: {{chicken.desc}}</p>
+                <p>Direccion: {{chicken.address}}</p>
+                <p>Tel: {{chicken.tel}}</p></b>
+            </div>-->
+
+
+            <script>
+              function showConfirmationModal() {
+                  $('#confirmationModal').modal('show');
+              }
+          </script>
+            <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="confirmationModalLabel">Confirmación</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          ¡Tour agregado al carrito con éxito! para el dia {{chicken.datev}}
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+  
+       
+         <br>
+        
+           
+       
+
+              </div>
+            
+          </div>
+        </div>
+
+        <div class="col-md-4 carr" >
+          <div class="bg-light CARRT">
+            <h2>Carrito de compras</h2>
+            <ul class="text-left" id="pcart"></ul>
+            <H3 class="text-center" id="ptotal">Total : 0.00</H3>
+            <div class="cartc">
+            <a href="{% url 'food:order' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">Checkout</a></div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    
+    <h2>{{ msg }}</h2>
+  </center>
+  <footer class="bg-dark text-white p-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Contacto</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Dirección: Ciudad, País</p>
+                <p><i class="fas fa-envelope"></i> Correo: info@extremetravel.com</p>
+                <p><i class="fas fa-phone"></i> Teléfono: +123 456 7890</p>
+            </div>
+            <div class="col-md-4">
+                <h4>Enlaces útiles</h4>
+                <ul class="list-unstyled">
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Destinos</a></li>
+                    <li><a href="#">Tours</a></li>
+                    <li><a href="#">Reseñas</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>Síguenos</h4>
+                <p>Conéctate con nosotros en redes sociales:</p>
+                <a href="#" class="btn btn-outline-light"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="btn btn-outline-light"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="btn btn-outline-light"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+  <!-- jQuery library -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <!-- Popper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'food/js/main.js' %}"></script>
+  <script src="{% static 'food/js/order.js' %}"></script>
+</body>
+</html>

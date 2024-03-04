@@ -1,0 +1,336 @@
+
+
+    
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}MAPA {%endblock%}</title>
+    <!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+<!-- Leaflet JavaScript -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+        <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="icon" href="https://www.flaticon.es/svg/vstatic/svg/3916/3916657.svg?token=exp=1662854069~hmac=136bd71682904cb823525cd8938961b9">
+
+
+    <style>
+      
+      body {
+        background-image: url('https://img.freepik.com/foto-gratis/concreto-texturado-blanco_125540-1826.jpg?w=996&t=st=1708584169~exp=1708584769~hmac=6802f37a96b71f7b953580787dab6c7cf1f21b681cf0d8a35082798e77006d33');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+    }
+    .navbar-light .navbar-nav .nav-link {
+      color: rgb(189, 172, 103);
+    }
+      .form-inline .btn-success {
+          background-color: #28a745;
+          border-color: #28a745;
+          color: white;
+      }
+      .btn-info {
+        color: #fff;
+        background-color: #e9d086;
+        border-color: #908a31;
+      }
+      .form-inline .btn-success:hover {
+          background-color: #218838; /* Color de resaltado al pasar el ratón */
+          border-color: #1e7e34;
+      }
+  
+      .navbar-brand img {
+          border: 2px solid white;
+          border-radius: 50%;
+      }
+      .ar {
+        color: #fff;
+        text-decoration: none;
+        background-color: #bca52cfc;
+      }
+      .bg-dark {
+          background-color: #2a3b26;
+      }
+  
+      .navbar-nav .nav-link {
+          color: white;
+          font-weight: bold;
+      }
+  
+      .navbar-nav .nav-link:hover {
+          color: #17a2b8; /* Color de resaltado al pasar el ratón */
+      }
+  
+      .CARRT {
+          padding: 15px;
+          margin-top: 20px;
+      }
+  
+      .navbar-text {
+          color: white;
+          font-weight: bold;
+      }
+  
+      .navbar-nav {
+          margin-right: 10px;
+      }
+  
+      * {
+          margin: 0;
+          box-sizing: border-box;
+      }
+  
+      .navbar-text {
+          margin-right: 10px;
+      }
+  
+      .navbar-expand-sm {
+          -ms-flex-flow: row nowrap;
+          flex-flow: initial;
+          -ms-flex-pack: start;
+          justify-content: center;
+      }
+  
+      .container {
+          margin-top: 20px;
+      }
+  
+      .form-inline {
+          margin-bottom: 20px;
+      }
+  
+      .card {
+          background-color: #e8e5e5f0;
+          margin-bottom: 20px;
+          font-family: "Lucida Console", "Courier New", monospace;
+      }
+  
+      .picture {
+          width: 100%;
+          height: auto;
+          max-width: 400px;
+          margin: 10px 0;
+      }
+  
+      .btn-info {
+          margin-top: 10px;
+      }
+  
+      .carr {
+          font-family: "Lucida Console", "Courier New", monospace;
+      }
+  
+      .perr {
+          padding: 177px;
+      }
+  
+      .cartc {
+        background-color: #bfac46;
+          color: black;
+          font-family: "Lucida Console", "Courier New", monospace;
+      }
+  
+      body {
+        font-family: "Lucida Console", "Courier New", monospace;
+        }
+
+        .banner {
+          position: relative;
+          width: 100%;
+          height: 300px; /* Ajusta la altura según sea necesario */
+          background-image: url('https://adeprotur.com.mx/frontend/adeprotur/media/news/529/7-extreme-sport-fb884aa5.jpg'); /* Ruta de la imagen */
+          background-size: cover;
+          background-position: center;
+          color: #fff; /* Color del texto */
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+      
+      .banner-content {
+          z-index: 1;
+      }
+      
+      .banner h1 {
+          margin: 0;
+          font-size: 2em;
+      }
+      
+      .banner p {
+          margin-top: 10px;
+          font-size: 1.2em;
+      }
+
+  </style>
+    {% load static %}
+    </head>
+    <body>
+      <nav class="navbar navbar-expand-sm bg-light navbar-light">
+        <!-- Brand/logo -->
+        <a class="navbar-brand" href="#">
+          <img class="bg-light rounded-circle" src="https://img.freepik.com/vector-gratis/logotipo-viaje-detallado_23-2148627268.jpg" alt="" style="width:100px;"/>
+        </a>
+        
+        <!-- Links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link {% if active_link == 'index' %} active{% endif %}" href="{% url 'index' %}">HOME</a>
+          </li>
+          {%if user.is_authenticated%}
+          <li class="nav-item">
+            <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:chicken' %}">DEPORTES EXTREMOS</a>
+          </li>
+          
+          {%else%}
+          <li class="nav-item">
+            <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:login' %}">LOGGEATE PARA VER LOS VIAJES</a>
+          </li>
+          {%endif%}
+          <li class="nav-item">
+            <a class="nav-link {% if active_link == 'burger' %} active{% endif %}" href="{% url 'food:burger' %}">MAPA</a>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'food:drink' %}">UBICACIONES</a>
+          </li>
+    
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'food:pizza' %}">PERFIL</a>
+          </li>
+           {% if user.is_authenticated %}
+            <li class="nav-item">
+                <span class="navbar-text">Bienvenido {{ user.username }}</span>
+            </li> <li class="nav-item">
+            <a href="{% url 'food:order' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+                <img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/>
+                <span id="cart">0</span>
+            </a>
+          </li>
+            {% endif %}
+         
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a href="{% url 'food:logout' %}" class="nav-link">
+                <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                LogOut
+            </a>
+          </li>
+    
+            <ul>
+         
+          {% else %}
+          <li class="nav-item">
+            <a href="{% url 'food:login' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+                <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                LogIn
+            </a>
+          </li> <li class="nav-item">
+            <a href="{% url 'food:signup' %}" class="nav-link {% if active_link == 'signup' %}active {% endif %}">
+                <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                Create account
+            </a>
+          </li>
+          {% endif %}
+        </ul> 
+        
+      </nav>
+      
+      <center>
+        {% block content %}<div class="errr" style="background-color: #e8e5e5f0; padding: 20px; ">EXPLORA EL MAPA PARA CONOCER LAS MEJORES ZONAS EN MÉXICO </div> {%endblock%}
+      </div><br><br><div id="map" style="height: 400px; width:800px;"></div>               
+
+      <script>
+        // Initialize the map
+        var map = L.map('map').setView([23.634501, -102.552784], 5);
+      
+        // Add a base map layer (you can choose a different tile layer)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+      
+        // Add a marker at specific coordinates
+        {% for chicken in chickens%}  
+        var marker = L.marker([{{chicken.lat}}, {{chicken.lon}}]).addTo(map);
+        marker.bindPopup(("<b>{{ chicken.name }}</b><br><a href='{% url 'food:details' chicken.id %}'>Ver detalles</a>")).openPopup();
+        
+         {% endfor %}
+      </script>
+     
+      <h1></h1>
+      <div class="container-fluid align-center">
+        <div class="row text-center background-color-dark">
+          <div class="col-md-8">
+            <div class="row">
+             
+            </div>
+          </div>
+    
+            <div class="col-md-4">
+              <div class="bg-light">
+              <h3><img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/> CARRITO DE COMPRAS</h3>
+              <ul class="text-left"id="bcart" ></ul>
+              <H3 class="text-center" id="btotal">Total : 0</H3>
+            </div><div class="cartc">
+            <a class="ar" href="{% url 'food:order' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">Checkout</a></div>
+          </div>
+            </div>
+          
+        </div>
+    
+    
+      </div>
+        
+        
+      <h2>{{msg}}</h2></center>
+        <footer class="bg-dark text-white p-4">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-4">
+                      <h4>Contacto</h4>
+                      <p><i class="fas fa-map-marker-alt"></i> Dirección: Ciudad, País</p>
+                      <p><i class="fas fa-envelope"></i> Correo: info@extremetravel.com</p>
+                      <p><i class="fas fa-phone"></i> Teléfono: +123 456 7890</p>
+                  </div>
+                  <div class="col-md-4">
+                      <h4>Enlaces útiles</h4>
+                      <ul class="list-unstyled">
+                          <li><a href="#">Inicio</a></li>
+                          <li><a href="#">Destinos</a></li>
+                          <li><a href="#">Tours</a></li>
+                          <li><a href="#">Reseñas</a></li>
+                      </ul>
+                  </div>
+                  <div class="col-md-4">
+                      <h4>Síguenos</h4>
+                      <p>Conéctate con nosotros en redes sociales:</p>
+                      <a href="#" class="btn btn-outline-light"><i class="fab fa-facebook-f"></i></a>
+                      <a href="#" class="btn btn-outline-light"><i class="fab fa-twitter"></i></a>
+                      <a href="#" class="btn btn-outline-light"><i class="fab fa-instagram"></i></a>
+                  </div>
+              </div>
+          </div>
+      </footer>
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'food/js/main.js' %}"></script>
+    <script src="{% static 'food/js/borders.js' %}"></script>
+    
+    
+    
+    </body>
+    </html>
