@@ -192,76 +192,84 @@ cursor: pointer;
       width: 100%; /* Asegúrate de que las imágenes ocupen todo el ancho del contenedor */
       height: auto; /* Permite que la altura de las imágenes se ajuste automáticamente */
     }
+    .navbar-container {
+      display: flex;
+      justify-content: center;
+      background-color:#f8f9fa;
+  }
+  
     
   
 
 </style>
  </head>
  <body>
-  <nav class="navbar navbar-expand-sm bg-light navbar-light">
-    <!-- Brand/logo -->
-    <a class="navbar-brand" href="#">
-      <img class="bg-light rounded-circle" src="https://img.freepik.com/vector-gratis/logotipo-viaje-detallado_23-2148627268.jpg" alt="" style="width:100px;"/>
-    </a>
-    
-    <!-- Links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link {% if active_link == 'index' %} active{% endif %}" href="{% url 'index' %}">HOME</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:chicken' %}">DEPORTES EXTREMOS</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'food:burger' %}">MAPA</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'food:drink' %}">UBICACIONES</a>
-      </li>
+  <div class="navbar-container">
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+      <!-- Brand/logo -->
+      <a class="navbar-brand" href="#">
+        <img class="bg-light rounded-circle" src="https://img.freepik.com/vector-gratis/logotipo-viaje-detallado_23-2148627268.jpg" alt="" style="width:100px;"/>
+      </a>
 
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'food:pizza' %}">PERFIL</a>
-      </li>
-       {% if user.is_authenticated %}
-        <li class="nav-item">
+      <!-- Navbar toggle button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link {% if active_link == 'index' %} active{% endif %}" href="{% url 'index' %}">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:chicken' %}">DEPORTES EXTREMOS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'food:burger' %}">MAPA</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'food:drink' %}">UBICACIONES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'food:pizza' %}">PERFIL</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
             <span class="navbar-text">Bienvenido {{ user.username }}</span>
-        </li>
-        {% endif %}
-      <li class="nav-item">
-        <a href="{% url 'food:order' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
-            <img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/>
-            <span id="cart">0</span>
-        </a>
-      </li>
-      {% if user.is_authenticated %}
-      <li class="nav-item">
-        <a href="{% url 'food:logout' %}" class="nav-link">
-            <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
-            LogOut
-        </a>
-      </li>
-
-        <ul>
-     
-      {% else %}
-      <li class="nav-item">
-        <a href="{% url 'food:login' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
-            <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
-            LogIn
-        </a>
-      </li> <li class="nav-item">
-        <a href="{% url 'food:signup' %}" class="nav-link {% if active_link == 'signup' %}active {% endif %}">
-            <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
-            Create account
-        </a>
-      </li>
-      {% endif %}
-    </ul> 
-    
-  </nav>
+          </li><li class="nav-item">
+            <a href="{% url 'food:ver_carrito_y_pagar' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+                <img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/>
+                
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'food:logout' %}" class="nav-link">
+              <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+              LogOut
+            </a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a href="{% url 'food:login' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+              <img class="bg-light rounded" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+              LogIn
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'food:signup' %}" class="nav-link {% if active_link == 'signup' %}active {% endif %}">
+              <img class="bg-light rounded" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+              Create account
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+  </div>
    <div>
      {% block content %}<h1></h1>  {%endblock%}
    </div>

@@ -6,6 +6,7 @@ from .models import Steak1
 from .models import Drink1
 from .models import Order
 from .models import Items
+from .models import Order1
 from .models import CustomUser
 from django.contrib.auth.models import AbstractUser
 from import_export import resources
@@ -23,7 +24,7 @@ admin.site.register(Chicken1, Chicken1Admin)
 class Burger1Admin(admin.ModelAdmin):
     list_display= ('name', 'priceM', 'priceL')
 admin.site.register(Burger1, Burger1Admin)
-
+admin.site.register(Order1)
 
 class Pizza1Admin(admin.ModelAdmin):
     list_display= ('name', 'priceM', 'priceL', 'loc')

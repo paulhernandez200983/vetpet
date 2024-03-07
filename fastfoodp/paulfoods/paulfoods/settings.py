@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-sv)3$pk78gwy6vqf#pks3po9zl*pw)7d38pokp2x!n)qzv%ye7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '*']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -129,9 +129,9 @@ STATIC_URL = 'static/'
 STATIC_ROOT =PurePath.joinpath(BASE_DIR, 'staticfiles'  )
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-PAYPAL_CLIENT_ID = 'ATb4WdtyoammYmiz72lqrmexmaqXE6rWsYC_-ZdZcii_PtQc0iBMEC7m0EPVGkNCjL60bqNeVk7i2pqo'
-PAYPAL_CLIENT_SECRET = 'ATb4WdtyoammYmiz72lqrmexmaqXE6rWsYC_-ZdZcii_PtQc0iBMEC7m0EPVGkNCjL60bqNeVk7i2pqo'
-PAYPAL_MODE = 'sandbox'  # Cambia a 'live' en producción
+PAYPAL_CLIENT_ID = 'AeetpAe5qdHU2LnDoKjcw-PWtDJGA2RCGAAQFupjPNuTAclwdayUODEkIf90apRdw9N1_FbrBTjE34U1'
+PAYPAL_CLIENT_SECRET = 'EAIKtUqz9aS2JEi1Tw0__C3pWrz1FYumbNI1vlL08qTQarmHjUbW2jB_Ppa_MS7tuNnkSHxlrkClNvQl'
+PAYPAL_MODE = 'live'  # Cambia a 'live' en producción
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

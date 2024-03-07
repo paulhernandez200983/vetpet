@@ -264,6 +264,7 @@ cursor: pointer;
     </ul> 
     
   </nav><center>
+    <div class="col-md-6 p-4 card">
     <div class="container-fluid m-4">
         <form id="formulario-tarjeta">
             <div class="form-group">
@@ -296,7 +297,7 @@ cursor: pointer;
                 if (formulario.checkValidity()) {
                     // Aquí puedes agregar tu lógica para procesar el pago
                     alert("Pago procesado correctamente");
-                    window.location.href = "{% url 'food:chicken' %}";
+                    window.location.href = "{% url 'food:succes' %}";
                 } else {
                     // Si el formulario no es válido, se mostrarán los mensajes de error automáticamente
                     formulario.reportValidity();
@@ -308,7 +309,7 @@ cursor: pointer;
         
   </div>
   
-  
+</div>
      
   
      

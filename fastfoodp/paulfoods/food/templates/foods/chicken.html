@@ -17,6 +17,47 @@
 
     {% load static %}
     <style>
+      /* Estilos generales */
+      body {
+        font-family: "Lucida Console", "Courier New", monospace;
+        background-image: url('https://img.freepik.com/foto-gratis/concreto-texturado-blanco_125540-1826.jpg?w=996&t=st=1708584169~exp=1708584769~hmac=6802f37a96b71f7b953580787dab6c7cf1f21b681cf0d8a35082798e77006d33');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+      }
+
+      /* Estilos para todos los elementos */
+      * {
+        box-sizing: border-box;
+      }
+
+      /* Estilos específicos para dispositivos móviles */
+      @media (max-width: 767px) {
+        .navbar-nav .nav-link {
+          color: #17a2b8;
+          font-weight: bold;
+        }
+        
+        .banner {
+          height: 200px;
+        }
+        
+        .banner h1 {
+          font-size: 1.5em;
+        }
+        
+        .banner p {
+          font-size: 1em;
+        }
+        
+        .form-inline .btn-success {
+          background-color: #28a745;
+          border-color: #28a745;
+          color: white;
+        }
+        
+        /* Agregar más estilos responsivos según sea necesario */
+      }
       .custom-div {
         border: 2px solid green; /* Borde verde de 2px */
         color: green; /* Texto verde */
@@ -27,8 +68,16 @@
     }
       .card {
         border: 2px solid black; /* Agrega un borde negro de 2px a todas las cards */
+        display:inline-table;
     }
+    .navbar-toggler {
+      border-color: #17a2b8;
+    }
+
     
+    .navbar-toggler-icon {
+      background-color: #fff;
+    }
       body {
         background-image: url('https://img.freepik.com/foto-gratis/concreto-texturado-blanco_125540-1826.jpg?w=996&t=st=1708584169~exp=1708584769~hmac=6802f37a96b71f7b953580787dab6c7cf1f21b681cf0d8a35082798e77006d33');
         background-size: cover;
@@ -182,6 +231,7 @@
           border: 2px solid #ddd; /* Optional: Add a border */
           border-radius: 10px; /* Optional: Add rounded corners */
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow */
+          display:block;
       }
     
     
@@ -229,75 +279,83 @@
           margin-top: 10px;
           font-size: 1.2em;
       }
+      .navbar-container {
+        display: flex;
+        justify-content: center;
+        background-color:#f8f9fa;
+    }
     
 
     </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-sm bg-light navbar-light">
-    <!-- Brand/logo -->
-    <a class="navbar-brand" href="#">
-      <img class="bg-light rounded-circle" src="https://img.freepik.com/vector-gratis/logotipo-viaje-detallado_23-2148627268.jpg" alt="" style="width:100px;"/>
-    </a>
-    
-    <!-- Links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link {% if active_link == 'index' %} active{% endif %}" href="{% url 'index' %}">HOME</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:chicken' %}">DEPORTES EXTREMOS</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'food:burger' %}">MAPA</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'food:drink' %}">UBICACIONES</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'food:pizza' %}">PERFIL</a>
-      </li>
-       {% if user.is_authenticated %}
-        <li class="nav-item">
-            <span class="navbar-text">Bienvenido {{ user.username }}</span>
-        </li>
-        {% endif %}
-      <li class="nav-item">
-        <a href="{% url 'food:ver_carrito_y_pagar' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
-            <img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/>
-            
+  <center>
+    <div class="navbar-container">
+      <nav class="navbar navbar-expand-sm bg-light navbar-light">
+        <!-- Brand/logo -->
+        <a class="navbar-brand" href="#">
+          <img class="bg-light rounded-circle" src="https://img.freepik.com/vector-gratis/logotipo-viaje-detallado_23-2148627268.jpg" alt="" style="width:100px;"/>
         </a>
-      </li>
-      {% if user.is_authenticated %}
-      <li class="nav-item">
-        <a href="{% url 'food:logout' %}" class="nav-link">
-            <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
-            LogOut
-        </a>
-      </li>
-
-        <ul>
-     
-      {% else %}
-      <li class="nav-item">
-        <a href="{% url 'food:login' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
-            <img class="bg-light rounded" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
-            LogIn
-        </a>
-      </li> <li class="nav-item">
-        <a href="{% url 'food:signup' %}" class="nav-link {% if active_link == 'signup' %}active {% endif %}">
-            <img class="bg-light rounded" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
-            Create account
-        </a>
-      </li>
-      {% endif %}
-    </ul> 
-    
-  </nav>
+  
+        <!-- Navbar toggle button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link {% if active_link == 'index' %} active{% endif %}" href="{% url 'index' %}">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:chicken' %}">DEPORTES EXTREMOS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'food:burger' %}">MAPA</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'food:drink' %}">UBICACIONES</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'food:pizza' %}">PERFIL</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <span class="navbar-text">Bienvenido {{ user.username }}</span>
+            </li><li class="nav-item">
+              <a href="{% url 'food:ver_carrito_y_pagar' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+                  <img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/>
+                  
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'food:logout' %}" class="nav-link">
+                <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                LogOut
+              </a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a href="{% url 'food:login' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+                <img class="bg-light rounded" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                LogIn
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'food:signup' %}" class="nav-link {% if active_link == 'signup' %}active {% endif %}">
+                <img class="bg-light rounded" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                Create account
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+    </div>
   {% block content %} {% endblock %}
   <center>
     <div class="banner">
@@ -535,16 +593,24 @@ function filterByAqua() {
               <div class="col-md-6 p-4 card">
                 <center>
                   <button class="category-value btn-info mt-4 rounded"><b>{{chicken.catg}}</b></button>
-                  <div class="rating">
-                    <!-- Utiliza íconos de estrellas vacías para representar las estrellas de calificación -->
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
+                  <br>
+                  
                 <!-- ... (Contenido existente de tus actividades extremas) ... -->
-                <h4 class="pt-4 " id="chick{{chicken.id}}">  {{chicken.name}}</h4>
+                <h4 class="pt-4 " id="chick{{chicken.id}}">  {{chicken.name}}</h4><div class="rating">
+                    
+                    <!-- Utiliza íconos de estrellas vacías para representar las estrellas de calificación -->
+                    {% if chicken.rating == 1 %}
+                <i class="fas fa-star"></i>
+            {% elif chicken.rating == 2 %}
+                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            {% elif chicken.rating == 3 %}
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            {% elif chicken.rating == 4 %}
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            {% elif chicken.rating == 5 %}
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            {% endif %}
+                </div><br>
              <img class="picture  rounded" src="{{chicken.pImage}}" style="width:400px" height="400px">
              <br><br> <img srcset="https://w7.pngwing.com/pngs/403/272/png-transparent-earth-globe-computer-icons-earth-globe-monochrome-world-thumbnail.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/> <span class="CATGG">{{chicken.estd}}</span><br><br>
           <H4>Paquete:</H4>

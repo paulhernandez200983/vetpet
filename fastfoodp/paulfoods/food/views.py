@@ -74,10 +74,35 @@ def order(request):
     ctx={'active_link': 'order'}
     return render(request, 'foods/order.html',ctx)
 
+from django.shortcuts import render, redirect
+from .models import Carrito, ItemCarrito, Order1
+
 def succes(request):
-    order= request.session['order']
-    ctx= {'order': order}
-    return render(request, 'foods/succes.html', ctx)
+    # Obtener el carrito del usuario actual
+    carrito, _ = Carrito.objects.get_or_create(usuario=request.user)
+    
+    # Obtener los elementos del carrito
+    items_carrito = ItemCarrito.objects.filter(carrito=carrito)
+    
+    # Calcular el total del carrito
+    total_carrito = sum(item.pollo.priceM * item.cantidad for item in items_carrito)
+    
+    # Crear una nueva orden
+    nueva_orden = Order1.objects.create(total_amount=total_carrito)  # Asumiendo que el modelo Order tiene un campo 'total_amount'
+    
+    # Asociar la orden con el usuario actual si es necesario
+    if request.user.is_authenticated:
+        nueva_orden.usuario = request.user
+        nueva_orden.save()
+    
+    # Guardar los elementos del carrito en la orden
+    
+    
+    # Limpiar el carrito después de completar la orden
+   
+    
+    return render(request, 'foods/succes.html', {'items_carrito': items_carrito, 'total_carrito': total_carrito})
+
 
 def tarjeta(request):
     
@@ -120,12 +145,11 @@ def logIn(request):
 def logOut(request):
     logout(request)
     return redirect('index')
-
-
-
+from .models import OrderItem
 def profile(request):
     user_data = None
-
+    user_orders = Order1.objects.all()
+    orders1 = OrderItem.objects.all()
     if request.method == 'POST':
         # Procesar el formulario y obtener los datos del usuario
         username = request.POST.get('username')
@@ -136,7 +160,8 @@ def profile(request):
         # Puedes asignar los datos para mostrarlos en la plantilla
         user_data = {'username': username, 'email': email}
 
-    return render(request, 'foods/pizza.html', {'user_data': user_data})
+    return render(request, 'foods/pizza.html', {'user_data': user_data, 'orders': user_orders, 'orders1': orders1})
+
 
 
 from django.shortcuts import render, get_object_or_404
@@ -291,7 +316,7 @@ def ver_chickens(request):
     # Obtener los elementos del carrito
     items_carrito = ItemCarrito.objects.filter(carrito=carrito)
     
-    return render(request, 'foods/chicken.html','foods/steak.html', {'chickens': chickens, 'items_carrito': items_carrito})
+    return render(request, 'foods/sucess.html''foods/chicken.html','foods/steak.html', {'chickens': chickens, 'items_carrito': items_carrito})
 
 
 def chicken(request):
@@ -524,35 +549,49 @@ def paymen(request):
     client_id = settings.PAYPAL_CLIENT_ID
     client_secret = settings.PAYPAL_CLIENT_SECRET
     paypal_mode = settings.PAYPAL_MODE
-
+    paypalrestsdk.configure({
+    "mode": "sandbox", 
+    "client_id": settings.PAYPAL_CLIENT_ID, # Updated
+    "client_secret": settings.PAYPAL_CLIENT_SECRET, # Updated
+})
     # Configura el objeto Payment de PayPal
-    paypal_payment = Payment({
+    payment = paypalrestsdk.Payment({
         "intent": "sale",
         "payer": {
-            "payment_method": "paypal"
+            "payment_method": "paypal",
         },
         "redirect_urls": {
-            "return_url": "http://localhost:8000/payment/execute/",
-            "cancel_url": "http://localhost:8000/payment/cancel/"
+            "return_url": request.build_absolute_uri(reverse('food:succes')),
+            "cancel_url": request.build_absolute_uri(reverse('food:payment_failed')),
         },
-        "transactions": [{
-            "amount": {
-                "total": "10.00",
-                "currency": "USD"
-            },
-            "description": "Compra de ejemplo"
-        }]
+        "transactions": [
+            {
+                "amount": {
+                    "total": "10.00",  # Total amount in USD
+                    "currency": "USD",
+                },
+                "description": "Payment for Product/Service",
+            }
+        ],
     })
 
-    # Autentica con las credenciales de PayPal Sandbox
-    paypal_payment.set_client_id(client_id)
-    paypal_payment.set_client_secret(client_secret)
-
-    # Crea el pago
-    if paypal_payment.create():
-        for link in paypal_payment.links:
-            if link.rel == 'approval_url':
-                approval_url = link.href
-                return render(request, 'payment/paypal_payment.html', {'approval_url': approval_url})
+    if payment.create():
+        return redirect(payment.links[1].href)  # Redirect to PayPal for payment
     else:
-        return render(request, 'payment/payment_error.html')
+        return render(request, 'payment_failed.html')
+def execute_payment(request):
+    payment_id = request.GET.get('paymentId')
+    payer_id = request.GET.get('PayerID')
+
+    payment = paypalrestsdk.Payment.find(payment_id)
+
+    if payment.execute({"payer_id": payer_id}):
+        return render(request, 'payment_success.html')
+    else:
+        return render(request, 'payment_failed.html')
+
+def payment_checkout(request):
+    return render(request, 'checkout.html')
+
+def payment_failed(request):
+    return render(request, 'payment_failed.html')

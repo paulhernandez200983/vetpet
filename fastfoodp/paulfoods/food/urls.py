@@ -39,7 +39,11 @@ path('checkoutp/<int:product_id>/', views.CheckOutp, name='checkoutp'),
 path ('ver_carrito_y_pagarp/',views.ver_carrito_y_pagarp, name=('ver_carrito_y_pagarp')),
  path('add_review/', views.add_review, name='add_review'),
  path ('tarjeta', views.tarjeta, name=('tarjeta')),
-  path('paypal/', views.paymen, name='paypal_payment'),
+  path('paypal/', views.paymen, name='paymen'),
+     path('checkout/', views.payment_checkout, name='checkout_payment'),
+
+    path('execute_payment', views.execute_payment, name='execute_payment'),
+    path('payment_failed', views.payment_failed, name='payment_failed')
  
 
 

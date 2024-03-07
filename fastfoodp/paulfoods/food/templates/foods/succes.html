@@ -232,6 +232,14 @@
         <div class="card">
           <H2> <img srcset="https://cdn-icons-png.flaticon.com/512/5220/5220625.png 2x" alt="icon" loading="lazy" style="width: 60px; height: 60px; "/>YOUR ORDER </h2>
             <P>{{order}}<br></P>
+            <h2>Items Purchased:</h2>
+            <ul>
+                {% for item in items_carrito %}
+                    <li>{{ item.pollo.name }} - Quantity: {{ item.cantidad }}</li>
+                {% endfor %}
+            </ul>
+            
+            <p>Total Amount: {{ total_carrito }}</p>
         </DIV>
         
         <h2>{{msg}}</h2></center>

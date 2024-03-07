@@ -323,24 +323,24 @@
               <br>
               
 
-              {% if reviews %}
                   <!-- Si hay reseñas, muestra el rating en forma de estrellas -->
-                  <div class="rating">
-                      
-                          
-                              <!-- Muestra una estrella llena por cada unidad del rating -->
-                              <i class="fas fa-star"></i>
-                          
-                          
-                              <!-- Muestra una estrella vacía por cada unidad que falta para completar 5 estrellas -->
-                           
-                          <br>
-                      
-                  </div>
-              {% else %}
-                  <!-- Si no hay reseñas, muestra un mensaje indicando que no hay reseñas disponibles -->
-                  <p>No hay reseñas disponibles para este pollo.</p>
-              {% endif %}
+                  
+                {%if reviews%}
+                {% if chicken.rating == 1 %}
+                <i class="fas fa-star"></i>
+            {% elif chicken.rating == 2 %}
+                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            {% elif chicken.rating == 3 %}
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            {% elif cgicken.rating == 4 %}
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            {% elif chicken.rating == 5 %}
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            {% endif %}
+              {%else%}
+              <p>Sin calificaciones</p> 
+              {%endif%}
+             <br>
               
               <br>
               <img srcset="https://w7.pngwing.com/pngs/403/272/png-transparent-earth-globe-computer-icons-earth-globe-monochrome-world-thumbnail.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; "/> {{chicken.estd}}<br>
@@ -370,7 +370,11 @@
               </div>
               <br><br>
               <div style='color:green;'>Puntos por esta compra: {{chicken.puntos}}</div>
-              <button class="btn-info mt-4" onclick="addchicken('{{ chicken.id }}', '{{chicken.name}}', '{{chicken.desc}}', '{{chicken.address}}', '{{chicken.tel}}', '{{chicken.priceM}}', '{{chicken.priceL}}', '{{chicken.datev}}'); showConfirmationModal();">AÑADIR A TOUR</button>
+              <form action="{% url 'food:agregar_al_carrito' chicken.id %}" method="post">
+                {% csrf_token %}
+                <button class="btn-info mt-4"type="submit" onclick=showConfirmationModal();><img src="https://www.bogotraveltours.com/wp-content/uploads/2016/10/icono-encuentro.png" alt="heart" style="width: 20px; height: 20px;"> Agregar al carrito</button>
+            </form>
+              
 
 
               </div>

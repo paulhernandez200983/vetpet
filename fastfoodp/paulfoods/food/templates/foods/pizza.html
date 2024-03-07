@@ -200,9 +200,9 @@
                 </li>
                 {% endif %}
               <li class="nav-item">
-                <a href="{% url 'food:order' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+                <a href="{% url 'food:ver_carrito_y_pagar' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
                     <img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/>
-                    <span id="cart">0</span>
+                    
                 </a>
               </li>
               {% if user.is_authenticated %}
@@ -261,11 +261,20 @@
           </li> <li class="nav-item">
             <a href="{% url 'food:signup' %}" class="nav-link {% if active_link == 'signup' %}active {% endif %}">
                 <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
-                Crea una cuneta nueve y unete
+                Crea una cuenta nueva y unete
             </a>
           </li>
     
     {% endif %}
+    <h2>User Orders</h2>
+    <ul>
+        {% for order in user_orders %}
+            <li>Order ID: {{ order.id }}, Total Amount: {{ order.total_amount }}</li>
+            <!-- Aquí puedes agregar más detalles de la orden si lo deseas -->
+        {% empty %}
+            <li>No orders found.</li>
+        {% endfor %}
+    </ul>
   </div>
 {% endblock %}
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
